@@ -39,4 +39,4 @@ const start = async () => {
   await browser.close();
 };
 
-start();
+setInterval(start, 5000) // run every 5 seconds
