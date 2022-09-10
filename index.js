@@ -7,7 +7,7 @@ const start = async () => {
   await page.goto("https://learnwebcode.github.io/practice-requests");
 
   const names = await page.evaluate(() => {
-    // client side js
+    // evaluate er generic for generell, catch all, client side js
     // console log vil logge til chrome console
     return Array.from(document.querySelectorAll(".info strong")).map(
       (x) => x.textContent
@@ -15,6 +15,16 @@ const start = async () => {
   });
 
   await fs.writeFile("names.txt", names.join("\r\n"));
+
+  const photos = await page.$$eval("img", (imgs) => {
+    // imgs er array av html elements
+    return imgs.map((x) => x.src);
+  });
+
+  for (const photo of photos) {
+    const imagepage = await page.goto(photo)
+    await fs.writeFile(photo.split("/").pop(), await imagepage.buffer())
+  }
 
   await browser.close();
 };
