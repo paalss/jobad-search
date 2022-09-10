@@ -8,6 +8,7 @@ const start = async () => {
 
   const names = await page.evaluate(() => {
     // client side js
+    // console log vil logge til chrome console
     return Array.from(document.querySelectorAll(".info strong")).map(
       (x) => x.textContent
     );
