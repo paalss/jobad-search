@@ -18,12 +18,18 @@ const start = async () => {
 
   await page.click("#clickme");
   const clickedData = await page.$eval("#data", (el) => el.textContent);
-  console.log(clickedData)
+  console.log(clickedData);
 
   const photos = await page.$$eval("img", (imgs) => {
     // imgs er array av html elements
     return imgs.map((x) => x.src);
   });
+
+  await page.type("#ourfield", "blue");
+  await Promise.all([page.click("#ourform button"), page.waitForNavigation()]);
+
+  const infoequals = await page.$eval("#message", (el) => el.textContent);
+  console.log(infoequals);
 
   for (const photo of photos) {
     const imagepage = await page.goto(photo);
