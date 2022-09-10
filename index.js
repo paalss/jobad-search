@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs/promises");
+const cron = require("node-cron");
 
 const start = async () => {
   const browser = await puppeteer.launch();
@@ -39,4 +40,4 @@ const start = async () => {
   await browser.close();
 };
 
-setInterval(start, 5000) // run every 5 seconds
+cron.schedule("*/5 * * * * *", start); // run every 5 seconds
