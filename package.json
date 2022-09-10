@@ -1,0 +1,15 @@
+{
+  "name": "scraping-puppeteer-tutorial",
+  "version": "1.0.0",
+  "description": "Begynn med web scraping. følg chrome puppeteer tutorial. Mål: fra en URL, finn ut tittel, finn ut om den inneholder teksten \"React\" og skriv til en tekstfil",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^17.1.3"
+  }
+}
