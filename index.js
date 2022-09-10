@@ -16,14 +16,18 @@ const start = async () => {
 
   await fs.writeFile("names.txt", names.join("\r\n"));
 
+  await page.click("#clickme");
+  const clickedData = await page.$eval("#data", (el) => el.textContent);
+  console.log(clickedData)
+
   const photos = await page.$$eval("img", (imgs) => {
     // imgs er array av html elements
     return imgs.map((x) => x.src);
   });
 
   for (const photo of photos) {
-    const imagepage = await page.goto(photo)
-    await fs.writeFile(photo.split("/").pop(), await imagepage.buffer())
+    const imagepage = await page.goto(photo);
+    await fs.writeFile(photo.split("/").pop(), await imagepage.buffer());
   }
 
   await browser.close();
