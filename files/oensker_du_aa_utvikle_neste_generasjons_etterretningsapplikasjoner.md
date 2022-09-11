@@ -4,3 +4,7 @@
 - react
 - html
 - css
+- angular
+- javascript
+- typescript
+- php

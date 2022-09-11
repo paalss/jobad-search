@@ -4,9 +4,11 @@ export const searchText = async (page) => {
     /react/i,
     /html/i,
     /css/i,
-    /sjakk/i,
-    /potet/i,
-    /verdensmesterskap/i,
+    /angular/i,
+    /javascript/i,
+    /typescript/i,
+    /php/i,
+    /mysql/i,
   ];
 
   const foundTermsArr = searchTerms
@@ -19,5 +21,9 @@ export const searchText = async (page) => {
     })
     .filter((e) => e !== null);
 
-  return foundTermsArr.join("\n- ")
+  const listOfTerms = foundTermsArr.map((e) => {
+    return (e = "- " + e);
+  });
+
+  return listOfTerms.join("\r\n");
 };

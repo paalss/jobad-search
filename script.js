@@ -18,7 +18,7 @@ const start = async () => {
   const content = `# [${heading}](${link})
 
 ## Kvalifikasjoner
-- ${foundTerms}`;
+${foundTerms}`;
 
   await fs.writeFile(`files/${fileName}.md`, content);
   await browser.close();
