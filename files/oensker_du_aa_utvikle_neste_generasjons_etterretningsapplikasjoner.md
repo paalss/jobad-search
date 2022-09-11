@@ -1,6 +1,6 @@
-
-    # Ønsker du å utvikle neste generasjons etterretningsapplikasjoner?
-
-    lorem ipsum
-    sjellåelelelaaa
-  
+# Ønsker du å utvikle neste generasjons etterretningsapplikasjoner?
+      
+## Kvalifikasjoner
+- react
+- html
+- css

@@ -9,7 +9,7 @@ export const searchText = async (page) => {
     /verdensmesterskap/i,
   ];
 
-  const found = searchTerms
+  const foundTermsArr = searchTerms
     .map((REGEX) => {
       if (pageContent.match(REGEX)) {
         return REGEX.source;
@@ -19,5 +19,5 @@ export const searchText = async (page) => {
     })
     .filter((e) => e !== null);
 
-  return found
+  return foundTermsArr.join("\n- ")
 };
