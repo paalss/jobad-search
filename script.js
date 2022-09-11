@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import fs from "fs/promises";
-import { listTitle } from "./import/listTitle.js";
+import { createFileName } from "./import/createFileName.js";
 
 const start = async () => {
   const browser = await puppeteer.launch();
@@ -9,10 +9,9 @@ const start = async () => {
     "https://jobb.tu.no/jobb/oensker-du-aa-utvikle-neste-generasjons-etterretningsapplikasjoner/48861"
   );
 
-  const result = await listTitle(page);
-  console.log(result);
+  const heading = await page.$eval("h1", (e) => e.textContent);
+  const fileName = await createFileName(heading);
 
-  const { textFileName, heading } = result;
 
   const content = `
     # ${heading}
@@ -20,7 +19,7 @@ const start = async () => {
     lorem ipsum
   `;
 
-  await fs.writeFile(`titles/${textFileName}.md`, content);
+  await fs.writeFile(`files/${fileName}.md`, content);
   await browser.close();
 };
 
