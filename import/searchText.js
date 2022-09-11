@@ -5,8 +5,11 @@ export const searchText = async (page) => {
     /html/i,
     /css/i,
     /angular/i,
+    /vue/i,
     /javascript/i,
     /typescript/i,
+    /javazone/i,
+    /shinzowosasageyo/i,
     /php/i,
     /mysql/i,
   ];
