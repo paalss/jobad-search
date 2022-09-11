@@ -3,6 +3,19 @@ Bruk git bash!
 
 
 
+
+
+
+```
+node script.js
+```
+
+
+
+
+
+
+
 https://github.com/puppeteer/puppeteer/issues/2009
 
 
