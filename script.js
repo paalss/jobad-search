@@ -1,26 +1,48 @@
 import puppeteer from "puppeteer";
-import fs from "fs/promises";
-import { createFileName } from "./import/createFileName.js";
-import { searchText } from "./import/searchText.js";
+import { createFile } from "./import/createFile.js";
 
 const start = async () => {
+  console.log('start');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  const link =
-    "https://jobb.tu.no/jobb/oensker-du-aa-utvikle-neste-generasjons-etterretningsapplikasjoner/48861";
-  await page.goto(link);
+  const joblist = "https://jobb.tu.no/sok?industries[]=IT&q=frontend";
+  await page.goto(joblist);
+  await page.screenshot({ path: "screenshots/joblist.png" });
 
-  const heading = await page.$eval("h1", (e) => e.textContent);
-  const fileName = await createFileName(heading);
+  console.group('jobAdLinksEVALUATE');
+  const jobAdLinksEVALUATE = await page.evaluate(() => {
+    // evaluate er generic for generell, catch all, client side js
+    // console log vil logge til chrome console
+    return Array.from(
+      document.querySelectorAll("div.search-result-list h3 a")
+    ).map((x) => {
+      console.log(x);
+      return x.href;
+    });
+  });
+  console.groupEnd()
+  
+  console.log(jobAdLinksEVALUATE);
+  
+  // console.group('jobAdLinks');
+  // const jobAdLinks = await page.$$eval("div.search-result-list h3 a", (e) => {
+  //   console.log(e);
+  //   return e;
+  // });
+  // console.groupEnd();
+  // console.log('woaaaaaaahaha');
 
-  const foundTerms = await searchText(page);
+  // console.log(jobAdLinks);
 
-  const content = `# [${heading}](${link})
+  // console.log('dingenligngeling');
 
-## Kvalifikasjoner
-${foundTerms}`;
+  await page.goto(jobAdLinksEVALUATE[0]);
+  await page.screenshot({ path: "screenshots/job.png"})
 
-  await fs.writeFile(`files/${fileName}.md`, content);
+  // create file from job advertisement page
+  // createFile(page);
+
+  console.log('end');
   await browser.close();
 };
 
